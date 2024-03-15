@@ -2,6 +2,8 @@ from flask import Flask, redirect, session, url_for, render_template, request
 
 app = Flask(__name__)
 
+app.secret_key = "123456"  
+
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -15,7 +17,7 @@ def login():
     else:
         return render_template("login.html")
 
-@app.route("/<user>")
+@app.route("/user")
 def user():
     if "user" in session:
         user = session["user"]
@@ -25,4 +27,4 @@ def user():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)
